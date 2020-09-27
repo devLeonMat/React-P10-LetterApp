@@ -1,6 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
+
 
 const Formulario = () => {
+
+    const [search, saveSearch] = useState({
+        artist: '',
+        song: ''
+    });
+
+    const {artist, song} = search;
+
+
+    // function for input
+    const updateState = e => {
+        saveSearch({
+            ...search,
+            [e.target.name]: e.target.value
+        })
+    };
+
+
     return (
         <div className="bg-info">
             <div className="container">
@@ -14,19 +33,31 @@ const Formulario = () => {
                                 <div className="col-md-6">
                                     <div className="form-group">
                                         <label>Artista</label>
-                                        <input type="text" className="form-control" name="artista"
-                                               placeholder="Nombre artista"/>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="artist"
+                                            placeholder="Nombre artista"
+                                            onChange={updateState}
+                                            value={artist}
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="form-group">
-                                        <label>Artista</label>
-                                        <input type="text" className="form-control" name="artista"
-                                               placeholder="Nombre artista"/>
+                                        <label>cancion</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="song"
+                                            placeholder="Nombre de la canción"
+                                            onChange={updateState}
+                                            value={song}
+                                        />
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-primary float-right" >Buscar</button>
+                            <button type="submit" className="btn btn-primary float-right">Buscar</button>
                         </fieldset>
                     </form>
                 </div>
