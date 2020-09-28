@@ -1,12 +1,14 @@
 import React, {useState} from "react";
 
 
-const Formulario = () => {
+const Formulario = ({saveSearchLetter}) => {
 
     const [search, saveSearch] = useState({
         artist: '',
         song: ''
     });
+    const [error, saveError] = useState(false);
+
 
     const {artist, song} = search;
 
@@ -19,12 +21,24 @@ const Formulario = () => {
         })
     };
 
+    // build apis
+    const SearchInformation = e => {
+        e.preventDefault();
+        if (artist.trim() === '' || song.trim() === '') {
+            saveError(true);
+        }
+        // send to principal component
+        saveSearchLetter(search);
+
+    };
+
 
     return (
         <div className="bg-info">
+            {error ? <p className="alert alert-danger text-center p-2">Todos los campos son obligatorios</p> : null}
             <div className="container">
                 <div className="row">
-                    <form className="col card text-white bg-transparent mb-5 pt-5 pb-2" action="">
+                    <form className="col card text-white bg-transparent mb-5 pt-5 pb-2" onSubmit={SearchInformation}>
                         <fieldset>
                             <legend className="text-center">
                                 Buscador letras y canciones
