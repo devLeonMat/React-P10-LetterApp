@@ -26,6 +26,7 @@ const Formulario = ({saveSearchLetter}) => {
         e.preventDefault();
         if (artist.trim() === '' || song.trim() === '') {
             saveError(true);
+            return;
         }
         // send to principal component
         saveSearchLetter(search);
